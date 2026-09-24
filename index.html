@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robert Filipšek | Inženir & Razvijalec</title>
     <meta name="description" content="Osebna spletna stran Roberta Filipška – inženiring, razvoj spletnih aplikacij in orodij.">
-    
+
+    <!-- Favicon / zaznamek / ikona ob shranitvi kot aplikacija -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='68'%20font-family='Dancing%20Script,Brush%20Script%20MT,cursive'%20font-size='54'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ERF%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='68'%20font-family='Dancing%20Script,Brush%20Script%20MT,cursive'%20font-size='54'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ERF%3C/text%3E%3C/svg%3E">
+    <meta name="theme-color" content="#070a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Robert Filipšek">
+
     <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Tailwind CSS CDN -->
@@ -20,6 +28,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        logo: ['Dancing Script', 'cursive'],
                     }
                 }
             }
@@ -58,8 +67,8 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-[#070a0f] border-b border-slate-800">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center space-x-3 group">
-                <div class="w-9 h-9 rounded-full bg-blue-600 text-white font-bold text-sm flex items-center justify-center tracking-tight shadow-md">
-                    RF
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center shadow-md">
+                    <span class="font-logo font-bold text-2xl leading-none" style="margin-top:-3px;">RF</span>
                 </div>
                 <span class="font-bold text-white tracking-tight text-base group-hover:text-blue-400 transition">Robert Filipšek</span>
             </a>
@@ -100,6 +109,10 @@
 
                     <p class="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-xl">
                         Ukvarjam se z načrtovanjem industrijske avtomatizacije ter razvojem hitrih in uporabnih spletnih orodij ter aplikacij za vsakodnevno uporabo.
+                    </p>
+
+                    <p class="text-sm text-slate-400 font-medium">
+                        V prostem času sem doslej razvil že <span class="text-blue-400 font-bold" data-tool-count>12</span>+ takšnih orodij – nekaj jih najdeš spodaj.
                     </p>
 
                     <div class="pt-2 flex flex-wrap items-center gap-4">
@@ -157,7 +170,11 @@
                     </p>
 
                     <p class="text-slate-200 leading-relaxed text-sm sm:text-base">
-                        Izjemen interes posvečam sodobnim tehnologijam in umetni inteligenci, ki jo z veseljem raziskujem ter uporabljam pri razvoju svojih projektov. Poleg tega spremljam finančne trge ter investiram na borzi (delnice in ETF-ji) in v Bitcoin. Za sprostitev si občasno privoščim tudi kakšno igro na PlayStation 5 – kot zabavno zanimivost pa sva najino fotografijo ob strani z Vaneso s pomočjo AI predelala kar v stilu plakata za prihajajoči GTA 6, ki ga kot dolgoletni navdušenec serije že z zanimanjem pričakujem.
+                        Izjemen interes posvečam sodobnim tehnologijam in umetni inteligenci, ki jo z veseljem raziskujem ter uporabljam pri razvoju svojih projektov. Poleg tega spremljam finančne trge ter investiram na borzi (delnice in ETF-ji) in v Bitcoin.
+                    </p>
+
+                    <p class="text-slate-200 leading-relaxed text-sm sm:text-base">
+                        Za sprostitev si občasno privoščim tudi kakšno igro na PlayStation 5. Kot zabavno zanimivost sva z Vaneso najino skupno fotografijo s pomočjo AI predelala v stilu plakata za prihajajoči GTA 6 – serijo, ki jo kot dolgoletni navdušenec že z nestrpnostjo pričakujem.
                     </p>
 
                     <!-- Povezave do socialnih omrežij -->
@@ -185,190 +202,21 @@
     <section id="orodja" class="py-24 border-t border-slate-800 bg-[#070a0f]">
         <div class="max-w-6xl mx-auto px-6">
             
-            <div class="mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Portfolio & Projekti</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mt-2">Aplikacije in orodja</h2>
-                <p class="text-slate-300 text-sm max-w-xl mt-3">
-                    Aplikacije, kalkulatorji in sledilniki, razviti za čim večjo praktičnost, hitrost ter enostavno uporabo.
-                </p>
-            </div>
-
-            <!-- KATEGORIJA 1: Industrija & Inženirstvo -->
-            <div class="mb-14">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-microchip text-xs text-blue-400"></i>
-                    <span>Inženirstvo & Industrija</span>
-                </h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    
-                    <a href="https://robifilipsek-dev.github.io/kalkulator-mehanskih-pogonov/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-blue-400">POGONI</span>
-                            <h4 class="font-bold text-white group-hover:text-blue-300 transition mt-1 mb-2">Kalkulator pogonov</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Hitro in natančno dimenzioniranje mehanskih pogonskih sistemov.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri kalkulator</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/cikel-cas/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-blue-400">ROBOTIKA</span>
-                            <h4 class="font-bold text-white group-hover:text-blue-300 transition mt-1 mb-2">Analiza takta</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Izračun cikličnega časa in avtomatiziranih procesnih linij.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/varnostna-razdalja/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-blue-400">VARNOST / ISO</span>
-                            <h4 class="font-bold text-white group-hover:text-blue-300 transition mt-1 mb-2">Varnostna razdalja</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Izračun ustreznih varnostnih razdalj po industrijskih standardih.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/kalkulator-ujemov/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-blue-400">ISO 286</span>
-                            <h4 class="font-bold text-white group-hover:text-blue-300 transition mt-1 mb-2">Kalkulator ujemov</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Izračun toleranc, odstopanj in vrst ujemov za gredi ter izvrtine.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
+            <div class="mb-16 flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Portfolio & Projekti</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mt-2">Aplikacije in orodja</h2>
+                    <p class="text-slate-300 text-sm max-w-xl mt-3">
+                        Aplikacije, kalkulatorji in sledilniki, razviti za čim večjo praktičnost, hitrost ter enostavno uporabo.
+                    </p>
                 </div>
+                <button onclick="odpriNastavitve()" title="Nastavitve orodij" class="shrink-0 w-10 h-10 rounded-full bg-slate-900 border border-slate-700 hover:border-blue-500 hover:text-blue-400 text-slate-400 flex items-center justify-center transition">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
             </div>
 
-            <!-- KATEGORIJA 2: Finance & Sledilniki -->
-            <div class="mb-14">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-line text-xs text-emerald-400"></i>
-                    <span>Tržni Sledilniki & Finance</span>
-                </h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                    <a href="https://robifilipsek-dev.github.io/zlato-tracker/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-amber-400">PLEMENITE KOVINE</span>
-                            <h4 class="font-bold text-white group-hover:text-amber-300 transition mt-1 mb-2">Sledilnik zlata</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Spremljanje tržnih cen zlata in plemenitih kovin.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/bitcoin-tracker/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-amber-400">KRIPTO</span>
-                            <h4 class="font-bold text-white group-hover:text-amber-300 transition mt-1 mb-2">Sledilnik bitcoina</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Pregled gibanja cene Bitcoina v realnem času.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/cena-dizla/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-emerald-400">GORIVO</span>
-                            <h4 class="font-bold text-white group-hover:text-emerald-300 transition mt-1 mb-2">Sledilnik dizla</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Spremljanje cen dizelskega goriva in trendov sprememb.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/cena-bencina/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-emerald-400">GORIVO</span>
-                            <h4 class="font-bold text-white group-hover:text-emerald-300 transition mt-1 mb-2">Sledilnik bencina</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Aktualni pregled cen bencina na črpalkah po Sloveniji.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- KATEGORIJA 3: Prosti čas & Ostala Orodja -->
-            <div>
-                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-compass text-xs text-indigo-400"></i>
-                    <span>Prosti Čas & Razni Projekti</span>
-                </h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                    <a href="https://robifilipsek-dev.github.io/pizza-testo/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-indigo-400">KULINARIKA</span>
-                            <h4 class="font-bold text-white group-hover:text-indigo-300 transition mt-1 mb-2">Kalkulator za testo</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Natančen izračun hidracije, moke in kvasa za pice ter kruh.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/sportni-sledilnik/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-indigo-400">FITNES & ZDRAVJE</span>
-                            <h4 class="font-bold text-white group-hover:text-indigo-300 transition mt-1 mb-2">Šport in prehrana</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Aplikacija za enostavno beleženje treningov in vnosa hrane.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri orodje</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/flappy-runner/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-indigo-400">MINI IGRA</span>
-                            <h4 class="font-bold text-white group-hover:text-indigo-300 transition mt-1 mb-2">Flappy Runner</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Zabavna spletna mini igra za sprostitev med odmori.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri igro</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://robifilipsek-dev.github.io/zimovanje-hramba-avtodomov-prikolic-celje/" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
-                        <div>
-                            <span class="text-[11px] font-mono font-bold text-indigo-400">SPLETNA STRAN</span>
-                            <h4 class="font-bold text-white group-hover:text-indigo-300 transition mt-1 mb-2">Prostor za avtodom</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-6">Predstavitvena stran za hrambo in zimovanje avtodomov v Celju.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
-                            <span>Odpri stran</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
+            <!-- Sem JavaScript izriše kategorije in kartice orodij iz podatkov (glej <script> pri dnu strani) -->
+            <div id="orodja-vsebina"></div>
 
         </div>
     </section>
@@ -378,8 +226,13 @@
         <div class="max-w-4xl mx-auto px-6 text-center">
             
             <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">Kontakt</h2>
-            <p class="text-slate-200 max-w-lg mx-auto text-sm sm:text-base leading-relaxed mb-8">
+            <p class="text-slate-200 max-w-lg mx-auto text-sm sm:text-base leading-relaxed mb-3">
                 Če imaš kakšno vprašanje glede spletnih aplikacij ali predlog za novo orodje, me lahko kontaktiraš prek e-pošte ali družbenih omrežij.
+            </p>
+
+            <p class="flex items-center justify-center gap-2 text-xs text-slate-400 font-medium mb-8">
+                <i class="fa-solid fa-location-dot text-blue-400"></i>
+                <span>Celje, Slovenija</span>
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -408,6 +261,283 @@
             </div>
         </div>
     </footer>
+
+    <!-- NASTAVITVE ORODIJ (modalno okno) -->
+    <div id="nastavitve-overlay" class="hidden fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-start sm:items-center justify-center p-4 overflow-y-auto" onclick="if(event.target===this) zapriNastavitve()">
+        <div class="minimal-card w-full max-w-3xl rounded-2xl p-6 sm:p-8 my-8">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2"><i class="fa-solid fa-gear text-blue-400 text-base"></i> Nastavitve orodij</h3>
+                <button onclick="zapriNastavitve()" class="w-8 h-8 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-xs text-amber-300/90 bg-amber-500/10 border border-amber-500/30 rounded-lg px-3 py-2 mb-6 leading-relaxed">
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                Spremembe se shranijo samo v ta brskalnik (lokalno). Obiskovalci strani jih ne bodo videli, dokler jih ne "Izvoziš" in trajno vgradiš v datoteko strani (npr. tako, da JSON pošlješ meni, da ga uredim).
+            </p>
+
+            <!-- Obrazec za dodajanje / urejanje -->
+            <form id="orodje-obrazec" class="grid sm:grid-cols-2 gap-3 mb-6" onsubmit="shraniOrodje(event)">
+                <input type="hidden" id="f-id">
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Kategorija</label>
+                    <select id="f-kategorija" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                        <option value="inzenirstvo">Inženirstvo & Industrija</option>
+                        <option value="finance">Tržni Sledilniki & Finance</option>
+                        <option value="prosticas">Prosti Čas & Razni Projekti</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Barva oznake</label>
+                    <select id="f-barva" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                        <option value="blue">Modra</option>
+                        <option value="emerald">Zelena</option>
+                        <option value="amber">Rumena/zlata</option>
+                        <option value="indigo">Indigo</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Oznaka (majhen napis)</label>
+                    <input id="f-oznaka" placeholder="npr. GORIVO" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Naslov orodja</label>
+                    <input id="f-naslov" placeholder="npr. Sledilnik bencina" required class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="text-xs text-slate-400 font-semibold">Opis</label>
+                    <textarea id="f-opis" rows="2" placeholder="Kratek opis, kaj orodje počne." class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white"></textarea>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Povezava (URL)</label>
+                    <input id="f-link" type="url" placeholder="https://..." required class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Besedilo gumba</label>
+                    <input id="f-gumb" placeholder="Odpri orodje" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+                <div class="sm:col-span-2 flex items-center gap-3 pt-1">
+                    <button type="submit" class="px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition">Shrani orodje</button>
+                    <button type="button" onclick="prekliciUrejanje()" class="px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 hover:border-slate-500 text-white text-sm font-semibold transition">Prekliči urejanje</button>
+                </div>
+            </form>
+
+            <!-- Seznam obstoječih orodij -->
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Obstoječa orodja</h4>
+            <div id="orodje-seznam" class="space-y-2 max-h-64 overflow-y-auto pr-1 mb-6"></div>
+
+            <!-- Izvoz / uvoz / ponastavitev -->
+            <div class="border-t border-slate-800 pt-5 flex flex-wrap gap-3">
+                <button onclick="izvoziOrodja()" class="px-4 py-2 rounded-full bg-slate-900 border border-slate-700 hover:border-slate-500 text-white text-xs font-semibold transition flex items-center gap-2"><i class="fa-solid fa-download"></i> Izvozi JSON</button>
+                <button onclick="uvoziOrodja()" class="px-4 py-2 rounded-full bg-slate-900 border border-slate-700 hover:border-slate-500 text-white text-xs font-semibold transition flex items-center gap-2"><i class="fa-solid fa-upload"></i> Uvozi JSON</button>
+                <button onclick="ponastaviOrodja()" class="px-4 py-2 rounded-full bg-slate-900 border border-red-900 hover:border-red-500 text-red-300 text-xs font-semibold transition flex items-center gap-2"><i class="fa-solid fa-rotate-left"></i> Ponastavi na privzeto</button>
+            </div>
+            <textarea id="json-polje" class="hidden w-full mt-4 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 font-mono" rows="8"></textarea>
+        </div>
+    </div>
+
+    <!-- PODATKI O ORODJIH + LOGIKA ZA IZRIS IN UREJANJE -->
+    <script>
+        const PRIVZETA_ORODJA = [
+            { id: 'kalkulator-pogonov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'POGONI', naslov: 'Kalkulator pogonov', opis: 'Hitro in natančno dimenzioniranje mehanskih pogonskih sistemov.', link: 'https://robifilipsek-dev.github.io/kalkulator-mehanskih-pogonov/', gumb: 'Odpri kalkulator' },
+            { id: 'analiza-takta', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ROBOTIKA', naslov: 'Analiza takta', opis: 'Izračun cikličnega časa in avtomatiziranih procesnih linij.', link: 'https://robifilipsek-dev.github.io/cikel-cas/', gumb: 'Odpri orodje' },
+            { id: 'varnostna-razdalja', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'VARNOST / ISO', naslov: 'Varnostna razdalja', opis: 'Izračun ustreznih varnostnih razdalj po industrijskih standardih.', link: 'https://robifilipsek-dev.github.io/varnostna-razdalja/', gumb: 'Odpri orodje' },
+            { id: 'kalkulator-ujemov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ISO 286', naslov: 'Kalkulator ujemov', opis: 'Izračun toleranc, odstopanj in vrst ujemov za gredi ter izvrtine.', link: 'https://robifilipsek-dev.github.io/kalkulator-ujemov/', gumb: 'Odpri orodje' },
+            { id: 'sledilnik-zlata', kategorija: 'finance', barva: 'amber', oznaka: 'PLEMENITE KOVINE', naslov: 'Sledilnik zlata', opis: 'Spremljanje tržnih cen zlata in plemenitih kovin.', link: 'https://robifilipsek-dev.github.io/zlato-tracker/', gumb: 'Odpri orodje' },
+            { id: 'sledilnik-bitcoina', kategorija: 'finance', barva: 'amber', oznaka: 'KRIPTO', naslov: 'Sledilnik bitcoina', opis: 'Pregled gibanja cene Bitcoina v realnem času.', link: 'https://robifilipsek-dev.github.io/bitcoin-tracker/', gumb: 'Odpri orodje' },
+            { id: 'sledilnik-dizla', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik dizla', opis: 'Spremljanje cen dizelskega goriva in trendov sprememb.', link: 'https://robifilipsek-dev.github.io/cena-dizla/', gumb: 'Odpri orodje' },
+            { id: 'sledilnik-bencina', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik bencina', opis: 'Aktualni pregled cen bencina na črpalkah po Sloveniji.', link: 'https://robifilipsek-dev.github.io/cena-bencina/', gumb: 'Odpri orodje' },
+            { id: 'kalkulator-testo', kategorija: 'prosticas', barva: 'indigo', oznaka: 'KULINARIKA', naslov: 'Kalkulator za testo', opis: 'Natančen izračun hidracije, moke in kvasa za pice ter kruh.', link: 'https://robifilipsek-dev.github.io/pizza-testo/', gumb: 'Odpri orodje' },
+            { id: 'sport-prehrana', kategorija: 'prosticas', barva: 'indigo', oznaka: 'FITNES & ZDRAVJE', naslov: 'Šport in prehrana', opis: 'Aplikacija za enostavno beleženje treningov in vnosa hrane.', link: 'https://robifilipsek-dev.github.io/sportni-sledilnik/', gumb: 'Odpri orodje' },
+            { id: 'flappy-runner', kategorija: 'prosticas', barva: 'indigo', oznaka: 'MINI IGRA', naslov: 'Flappy Runner', opis: 'Zabavna spletna mini igra za sprostitev med odmori.', link: 'https://robifilipsek-dev.github.io/flappy-runner/', gumb: 'Odpri igro' },
+            { id: 'prostor-avtodom', kategorija: 'prosticas', barva: 'indigo', oznaka: 'SPLETNA STRAN', naslov: 'Prostor za avtodom', opis: 'Predstavitvena stran za hrambo in zimovanje avtodomov v Celju.', link: 'https://robifilipsek-dev.github.io/zimovanje-hramba-avtodomov-prikolic-celje/', gumb: 'Odpri stran' },
+        ];
+
+        const KATEGORIJE = {
+            inzenirstvo: { naslov: 'Inženirstvo & Industrija', ikona: 'fa-microchip', barva: 'blue' },
+            finance:     { naslov: 'Tržni Sledilniki & Finance', ikona: 'fa-chart-line', barva: 'emerald' },
+            prosticas:   { naslov: 'Prosti Čas & Razni Projekti', ikona: 'fa-compass', barva: 'indigo' },
+        };
+        const VRSTNI_RED = ['inzenirstvo', 'finance', 'prosticas'];
+        const SHRAMBA_KLJUC = 'rf_orodja_v1';
+
+        function pridobiOrodja() {
+            try {
+                const shranjeno = localStorage.getItem(SHRAMBA_KLJUC);
+                if (shranjeno) return JSON.parse(shranjeno);
+            } catch (e) { console.warn('Napaka pri branju shranjenih orodij:', e); }
+            return PRIVZETA_ORODJA.slice();
+        }
+
+        function shraniVShrambo(orodja) {
+            try {
+                localStorage.setItem(SHRAMBA_KLJUC, JSON.stringify(orodja));
+            } catch (e) { console.warn('Shranjevanje ni uspelo:', e); }
+        }
+
+        function pobegniHTML(niz) {
+            const div = document.createElement('div');
+            div.textContent = niz == null ? '' : String(niz);
+            return div.innerHTML;
+        }
+
+        function izrisiOrodja() {
+            const vsebnik = document.getElementById('orodja-vsebina');
+            const orodja = pridobiOrodja();
+            vsebnik.innerHTML = '';
+
+            VRSTNI_RED.forEach((kljucKat, i) => {
+                const meta = KATEGORIJE[kljucKat];
+                const postavke = orodja.filter(o => o.kategorija === kljucKat);
+                if (!postavke.length) return;
+
+                const blok = document.createElement('div');
+                blok.className = i < VRSTNI_RED.length - 1 ? 'mb-14' : '';
+                blok.innerHTML = `
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-6 flex items-center gap-2">
+                        <i class="fa-solid ${meta.ikona} text-xs text-${meta.barva}-400"></i>
+                        <span>${meta.naslov}</span>
+                    </h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        ${postavke.map(o => kartica(o)).join('')}
+                    </div>`;
+                vsebnik.appendChild(blok);
+            });
+
+            document.querySelectorAll('[data-tool-count]').forEach(el => el.textContent = orodja.length);
+            izrisiSeznamZaUrejanje(orodja);
+        }
+
+        function kartica(o) {
+            const barva = o.barva || 'blue';
+            return `
+                <a href="${pobegniHTML(o.link)}" target="_blank" class="minimal-card p-6 rounded-2xl flex flex-col justify-between group">
+                    <div>
+                        <span class="text-[11px] font-mono font-bold text-${barva}-400">${pobegniHTML(o.oznaka)}</span>
+                        <h4 class="font-bold text-white group-hover:text-${barva}-300 transition mt-1 mb-2">${pobegniHTML(o.naslov)}</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-6">${pobegniHTML(o.opis)}</p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white pt-4 border-t border-slate-800">
+                        <span>${pobegniHTML(o.gumb || 'Odpri orodje')}</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </div>
+                </a>`;
+        }
+
+        function izrisiSeznamZaUrejanje(orodja) {
+            const seznam = document.getElementById('orodje-seznam');
+            if (!orodja.length) {
+                seznam.innerHTML = '<p class="text-xs text-slate-500">Trenutno ni orodij.</p>';
+                return;
+            }
+            seznam.innerHTML = orodja.map(o => `
+                <div class="flex items-center justify-between gap-3 bg-slate-900/60 border border-slate-800 rounded-lg px-3 py-2">
+                    <div class="min-w-0">
+                        <p class="text-sm text-white font-semibold truncate">${pobegniHTML(o.naslov)}</p>
+                        <p class="text-[11px] text-slate-500 truncate">${pobegniHTML(KATEGORIJE[o.kategorija]?.naslov || o.kategorija)}</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="urejajOrodje('${o.id}')" class="w-7 h-7 rounded-full hover:bg-slate-800 text-slate-400 hover:text-blue-400 flex items-center justify-center transition"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="izbrisiOrodje('${o.id}')" class="w-7 h-7 rounded-full hover:bg-slate-800 text-slate-400 hover:text-red-400 flex items-center justify-center transition"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>`).join('');
+        }
+
+        function shraniOrodje(dogodek) {
+            dogodek.preventDefault();
+            const orodja = pridobiOrodja();
+            const id = document.getElementById('f-id').value;
+            const podatki = {
+                id: id || 'orodje-' + Date.now(),
+                kategorija: document.getElementById('f-kategorija').value,
+                barva: document.getElementById('f-barva').value,
+                oznaka: document.getElementById('f-oznaka').value.trim() || 'ORODJE',
+                naslov: document.getElementById('f-naslov').value.trim(),
+                opis: document.getElementById('f-opis').value.trim(),
+                link: document.getElementById('f-link').value.trim(),
+                gumb: document.getElementById('f-gumb').value.trim() || 'Odpri orodje',
+            };
+            if (!podatki.naslov || !podatki.link) return;
+
+            const obstojIndex = orodja.findIndex(o => o.id === id);
+            if (obstojIndex > -1) orodja[obstojIndex] = podatki;
+            else orodja.push(podatki);
+
+            shraniVShrambo(orodja);
+            izrisiOrodja();
+            prekliciUrejanje();
+        }
+
+        function urejajOrodje(id) {
+            const o = pridobiOrodja().find(o => o.id === id);
+            if (!o) return;
+            document.getElementById('f-id').value = o.id;
+            document.getElementById('f-kategorija').value = o.kategorija;
+            document.getElementById('f-barva').value = o.barva || 'blue';
+            document.getElementById('f-oznaka').value = o.oznaka || '';
+            document.getElementById('f-naslov').value = o.naslov || '';
+            document.getElementById('f-opis').value = o.opis || '';
+            document.getElementById('f-link').value = o.link || '';
+            document.getElementById('f-gumb').value = o.gumb || '';
+            document.getElementById('orodje-obrazec').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function prekliciUrejanje() {
+            document.getElementById('orodje-obrazec').reset();
+            document.getElementById('f-id').value = '';
+        }
+
+        function izbrisiOrodje(id) {
+            if (!confirm('Izbrišem to orodje s seznama?')) return;
+            const orodja = pridobiOrodja().filter(o => o.id !== id);
+            shraniVShrambo(orodja);
+            izrisiOrodja();
+        }
+
+        function izvoziOrodja() {
+            const polje = document.getElementById('json-polje');
+            polje.value = JSON.stringify(pridobiOrodja(), null, 2);
+            polje.classList.remove('hidden');
+            polje.select();
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(polje.value).catch(() => {});
+            }
+        }
+
+        function uvoziOrodja() {
+            const polje = document.getElementById('json-polje');
+            if (polje.classList.contains('hidden') || !polje.value.trim()) {
+                polje.classList.remove('hidden');
+                polje.value = '';
+                polje.placeholder = 'Prilepi JSON seznam orodij sem in nato ponovno klikni "Uvozi JSON" ...';
+                polje.focus();
+                return;
+            }
+            try {
+                const podatki = JSON.parse(polje.value);
+                if (!Array.isArray(podatki)) throw new Error('Ni seznam');
+                if (!confirm('S tem prepišeš trenutni seznam orodij. Nadaljujem?')) return;
+                shraniVShrambo(podatki);
+                izrisiOrodja();
+                polje.classList.add('hidden');
+            } catch (e) {
+                alert('JSON ni veljaven. Preveri obliko in poskusi znova.');
+            }
+        }
+
+        function ponastaviOrodja() {
+            if (!confirm('Ponastavim seznam nazaj na privzeta orodja? Tvoje lokalne spremembe bodo izgubljene.')) return;
+            localStorage.removeItem(SHRAMBA_KLJUC);
+            izrisiOrodja();
+        }
+
+        function odpriNastavitve() {
+            document.getElementById('nastavitve-overlay').classList.remove('hidden');
+        }
+        function zapriNastavitve() {
+            document.getElementById('nastavitve-overlay').classList.add('hidden');
+        }
+
+        izrisiOrodja();
+    </script>
 
 </body>
 </html>
