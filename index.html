@@ -202,17 +202,12 @@
     <section id="orodja" class="py-24 border-t border-slate-800 bg-[#070a0f]">
         <div class="max-w-6xl mx-auto px-6">
             
-            <div class="mb-16 flex items-start justify-between gap-4 flex-wrap">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Portfolio & Projekti</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mt-2">Aplikacije in orodja</h2>
-                    <p class="text-slate-300 text-sm max-w-xl mt-3">
-                        Aplikacije, kalkulatorji in sledilniki, razviti za čim večjo praktičnost, hitrost ter enostavno uporabo.
-                    </p>
-                </div>
-                <button onclick="odpriNastavitve()" title="Nastavitve orodij" class="shrink-0 w-10 h-10 rounded-full bg-slate-900 border border-slate-700 hover:border-blue-500 hover:text-blue-400 text-slate-400 flex items-center justify-center transition">
-                    <i class="fa-solid fa-gear"></i>
-                </button>
+            <div class="mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Portfolio & Projekti</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mt-2">Aplikacije in orodja</h2>
+                <p class="text-slate-300 text-sm max-w-xl mt-3">
+                    Aplikacije, kalkulatorji in sledilniki, razviti za čim večjo praktičnost, hitrost ter enostavno uporabo.
+                </p>
             </div>
 
             <!-- Sem JavaScript izriše kategorije in kartice orodij iz podatkov (glej <script> pri dnu strani) -->
@@ -262,16 +257,41 @@
         </div>
     </footer>
 
+    <!-- PRIJAVA (skrita, odpre se na naslov.html#nastavitve) -->
+    <div id="prijava-overlay" class="hidden fixed inset-0 z-[110] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this) zapriPrijavo()">
+        <div class="minimal-card w-full max-w-sm rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-lock text-blue-400 text-sm"></i> Prijava</h3>
+                <button onclick="zapriPrijavo()" class="w-8 h-8 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="prijava(event)" class="space-y-3">
+                <div>
+                    <label class="text-xs text-slate-400 font-semibold">E-pošta</label>
+                    <input id="p-email" type="email" required autocomplete="username" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+                <div>
+                    <label class="text-xs text-slate-400 font-semibold">Geslo</label>
+                    <input id="p-geslo" type="password" required autocomplete="current-password" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+                <p id="p-napaka" class="hidden text-xs text-red-400"></p>
+                <button type="submit" class="w-full px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition">Prijava</button>
+            </form>
+        </div>
+    </div>
+
     <!-- NASTAVITVE ORODIJ (modalno okno) -->
     <div id="nastavitve-overlay" class="hidden fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-start sm:items-center justify-center p-4 overflow-y-auto" onclick="if(event.target===this) zapriNastavitve()">
         <div class="minimal-card w-full max-w-3xl rounded-2xl p-6 sm:p-8 my-8">
             <div class="flex items-center justify-between mb-2">
                 <h3 class="text-xl font-bold text-white flex items-center gap-2"><i class="fa-solid fa-gear text-blue-400 text-base"></i> Nastavitve orodij</h3>
-                <button onclick="zapriNastavitve()" class="w-8 h-8 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+                <div class="flex items-center gap-2">
+                    <button onclick="odjava()" title="Odjava" class="text-xs text-slate-400 hover:text-red-400 px-2 py-1 transition">Odjava</button>
+                    <button onclick="zapriNastavitve()" class="w-8 h-8 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
-            <p class="text-xs text-amber-300/90 bg-amber-500/10 border border-amber-500/30 rounded-lg px-3 py-2 mb-6 leading-relaxed">
-                <i class="fa-solid fa-triangle-exclamation mr-1"></i>
-                Spremembe se shranijo samo v ta brskalnik (lokalno). Obiskovalci strani jih ne bodo videli, dokler jih ne "Izvoziš" in trajno vgradiš v datoteko strani (npr. tako, da JSON pošlješ meni, da ga uredim).
+            <p class="text-xs text-emerald-300/90 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2 mb-6 leading-relaxed">
+                <i class="fa-solid fa-circle-check mr-1"></i>
+                Spremembe se shranijo v bazo (Supabase) in so takoj vidne vsem obiskovalcem strani. Za urejanje moraš biti prijavljen.
             </p>
 
             <!-- Obrazec za dodajanje / urejanje -->
@@ -334,21 +354,30 @@
         </div>
     </div>
 
-    <!-- PODATKI O ORODJIH + LOGIKA ZA IZRIS IN UREJANJE -->
+    <!-- Supabase JS knjižnica -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+    <!-- PODATKI O ORODJIH + LOGIKA ZA IZRIS, PRIJAVO IN UREJANJE -->
     <script>
+        // ------- Supabase povezava -------
+        const SUPABASE_URL = 'https://rcwmenrhdlcojmahrami.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjd21lbnJoZGxjb2ptYWhyYW1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNDU0ODAsImV4cCI6MjEwNTgyMTQ4MH0.ALMY2NWMVDmaojwjxCkQ_CDdOjSHWKdj2S-2DjuYFWE';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Rezervni seznam, če baza trenutno ni dosegljiva (npr. brez interneta)
         const PRIVZETA_ORODJA = [
-            { id: 'kalkulator-pogonov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'POGONI', naslov: 'Kalkulator pogonov', opis: 'Hitro in natančno dimenzioniranje mehanskih pogonskih sistemov.', link: 'https://robifilipsek-dev.github.io/kalkulator-mehanskih-pogonov/', gumb: 'Odpri kalkulator' },
-            { id: 'analiza-takta', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ROBOTIKA', naslov: 'Analiza takta', opis: 'Izračun cikličnega časa in avtomatiziranih procesnih linij.', link: 'https://robifilipsek-dev.github.io/cikel-cas/', gumb: 'Odpri orodje' },
-            { id: 'varnostna-razdalja', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'VARNOST / ISO', naslov: 'Varnostna razdalja', opis: 'Izračun ustreznih varnostnih razdalj po industrijskih standardih.', link: 'https://robifilipsek-dev.github.io/varnostna-razdalja/', gumb: 'Odpri orodje' },
-            { id: 'kalkulator-ujemov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ISO 286', naslov: 'Kalkulator ujemov', opis: 'Izračun toleranc, odstopanj in vrst ujemov za gredi ter izvrtine.', link: 'https://robifilipsek-dev.github.io/kalkulator-ujemov/', gumb: 'Odpri orodje' },
-            { id: 'sledilnik-zlata', kategorija: 'finance', barva: 'amber', oznaka: 'PLEMENITE KOVINE', naslov: 'Sledilnik zlata', opis: 'Spremljanje tržnih cen zlata in plemenitih kovin.', link: 'https://robifilipsek-dev.github.io/zlato-tracker/', gumb: 'Odpri orodje' },
-            { id: 'sledilnik-bitcoina', kategorija: 'finance', barva: 'amber', oznaka: 'KRIPTO', naslov: 'Sledilnik bitcoina', opis: 'Pregled gibanja cene Bitcoina v realnem času.', link: 'https://robifilipsek-dev.github.io/bitcoin-tracker/', gumb: 'Odpri orodje' },
-            { id: 'sledilnik-dizla', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik dizla', opis: 'Spremljanje cen dizelskega goriva in trendov sprememb.', link: 'https://robifilipsek-dev.github.io/cena-dizla/', gumb: 'Odpri orodje' },
-            { id: 'sledilnik-bencina', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik bencina', opis: 'Aktualni pregled cen bencina na črpalkah po Sloveniji.', link: 'https://robifilipsek-dev.github.io/cena-bencina/', gumb: 'Odpri orodje' },
-            { id: 'kalkulator-testo', kategorija: 'prosticas', barva: 'indigo', oznaka: 'KULINARIKA', naslov: 'Kalkulator za testo', opis: 'Natančen izračun hidracije, moke in kvasa za pice ter kruh.', link: 'https://robifilipsek-dev.github.io/pizza-testo/', gumb: 'Odpri orodje' },
-            { id: 'sport-prehrana', kategorija: 'prosticas', barva: 'indigo', oznaka: 'FITNES & ZDRAVJE', naslov: 'Šport in prehrana', opis: 'Aplikacija za enostavno beleženje treningov in vnosa hrane.', link: 'https://robifilipsek-dev.github.io/sportni-sledilnik/', gumb: 'Odpri orodje' },
-            { id: 'flappy-runner', kategorija: 'prosticas', barva: 'indigo', oznaka: 'MINI IGRA', naslov: 'Flappy Runner', opis: 'Zabavna spletna mini igra za sprostitev med odmori.', link: 'https://robifilipsek-dev.github.io/flappy-runner/', gumb: 'Odpri igro' },
-            { id: 'prostor-avtodom', kategorija: 'prosticas', barva: 'indigo', oznaka: 'SPLETNA STRAN', naslov: 'Prostor za avtodom', opis: 'Predstavitvena stran za hrambo in zimovanje avtodomov v Celju.', link: 'https://robifilipsek-dev.github.io/zimovanje-hramba-avtodomov-prikolic-celje/', gumb: 'Odpri stran' },
+            { id: 'kalkulator-pogonov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'POGONI', naslov: 'Kalkulator pogonov', opis: 'Hitro in natančno dimenzioniranje mehanskih pogonskih sistemov.', link: 'https://robifilipsek-dev.github.io/kalkulator-mehanskih-pogonov/', gumb: 'Odpri kalkulator', vrstni_red: 1 },
+            { id: 'analiza-takta', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ROBOTIKA', naslov: 'Analiza takta', opis: 'Izračun cikličnega časa in avtomatiziranih procesnih linij.', link: 'https://robifilipsek-dev.github.io/cikel-cas/', gumb: 'Odpri orodje', vrstni_red: 2 },
+            { id: 'varnostna-razdalja', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'VARNOST / ISO', naslov: 'Varnostna razdalja', opis: 'Izračun ustreznih varnostnih razdalj po industrijskih standardih.', link: 'https://robifilipsek-dev.github.io/varnostna-razdalja/', gumb: 'Odpri orodje', vrstni_red: 3 },
+            { id: 'kalkulator-ujemov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ISO 286', naslov: 'Kalkulator ujemov', opis: 'Izračun toleranc, odstopanj in vrst ujemov za gredi ter izvrtine.', link: 'https://robifilipsek-dev.github.io/kalkulator-ujemov/', gumb: 'Odpri orodje', vrstni_red: 4 },
+            { id: 'sledilnik-zlata', kategorija: 'finance', barva: 'amber', oznaka: 'PLEMENITE KOVINE', naslov: 'Sledilnik zlata', opis: 'Spremljanje tržnih cen zlata in plemenitih kovin.', link: 'https://robifilipsek-dev.github.io/zlato-tracker/', gumb: 'Odpri orodje', vrstni_red: 5 },
+            { id: 'sledilnik-bitcoina', kategorija: 'finance', barva: 'amber', oznaka: 'KRIPTO', naslov: 'Sledilnik bitcoina', opis: 'Pregled gibanja cene Bitcoina v realnem času.', link: 'https://robifilipsek-dev.github.io/bitcoin-tracker/', gumb: 'Odpri orodje', vrstni_red: 6 },
+            { id: 'sledilnik-dizla', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik dizla', opis: 'Spremljanje cen dizelskega goriva in trendov sprememb.', link: 'https://robifilipsek-dev.github.io/cena-dizla/', gumb: 'Odpri orodje', vrstni_red: 7 },
+            { id: 'sledilnik-bencina', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik bencina', opis: 'Aktualni pregled cen bencina na črpalkah po Sloveniji.', link: 'https://robifilipsek-dev.github.io/cena-bencina/', gumb: 'Odpri orodje', vrstni_red: 8 },
+            { id: 'kalkulator-testo', kategorija: 'prosticas', barva: 'indigo', oznaka: 'KULINARIKA', naslov: 'Kalkulator za testo', opis: 'Natančen izračun hidracije, moke in kvasa za pice ter kruh.', link: 'https://robifilipsek-dev.github.io/pizza-testo/', gumb: 'Odpri orodje', vrstni_red: 9 },
+            { id: 'sport-prehrana', kategorija: 'prosticas', barva: 'indigo', oznaka: 'FITNES & ZDRAVJE', naslov: 'Šport in prehrana', opis: 'Aplikacija za enostavno beleženje treningov in vnosa hrane.', link: 'https://robifilipsek-dev.github.io/sportni-sledilnik/', gumb: 'Odpri orodje', vrstni_red: 10 },
+            { id: 'flappy-runner', kategorija: 'prosticas', barva: 'indigo', oznaka: 'MINI IGRA', naslov: 'Flappy Runner', opis: 'Zabavna spletna mini igra za sprostitev med odmori.', link: 'https://robifilipsek-dev.github.io/flappy-runner/', gumb: 'Odpri igro', vrstni_red: 11 },
+            { id: 'prostor-avtodom', kategorija: 'prosticas', barva: 'indigo', oznaka: 'SPLETNA STRAN', naslov: 'Prostor za avtodom', opis: 'Predstavitvena stran za hrambo in zimovanje avtodomov v Celju.', link: 'https://robifilipsek-dev.github.io/zimovanje-hramba-avtodomov-prikolic-celje/', gumb: 'Odpri stran', vrstni_red: 12 },
         ];
 
         const KATEGORIJE = {
@@ -356,22 +385,10 @@
             finance:     { naslov: 'Tržni Sledilniki & Finance', ikona: 'fa-chart-line', barva: 'emerald' },
             prosticas:   { naslov: 'Prosti Čas & Razni Projekti', ikona: 'fa-compass', barva: 'indigo' },
         };
-        const VRSTNI_RED = ['inzenirstvo', 'finance', 'prosticas'];
-        const SHRAMBA_KLJUC = 'rf_orodja_v1';
+        const VRSTNI_RED_KAT = ['inzenirstvo', 'finance', 'prosticas'];
 
-        function pridobiOrodja() {
-            try {
-                const shranjeno = localStorage.getItem(SHRAMBA_KLJUC);
-                if (shranjeno) return JSON.parse(shranjeno);
-            } catch (e) { console.warn('Napaka pri branju shranjenih orodij:', e); }
-            return PRIVZETA_ORODJA.slice();
-        }
-
-        function shraniVShrambo(orodja) {
-            try {
-                localStorage.setItem(SHRAMBA_KLJUC, JSON.stringify(orodja));
-            } catch (e) { console.warn('Shranjevanje ni uspelo:', e); }
-        }
+        let orodjaPomnilnik = [];   // zadnji naloženi seznam orodij (za izris in urejanje)
+        let prijavljenUporabnik = null;
 
         function pobegniHTML(niz) {
             const div = document.createElement('div');
@@ -379,18 +396,29 @@
             return div.innerHTML;
         }
 
+        // ------- Branje orodij iz Supabase (javno, ne rabi prijave) -------
+        async function naloziOrodja() {
+            const { data, error } = await sb.from('orodja').select('*').order('vrstni_red', { ascending: true });
+            if (error) {
+                console.warn('Napaka pri branju iz Supabase, uporabljam rezervni seznam:', error.message);
+                orodjaPomnilnik = PRIVZETA_ORODJA.slice();
+            } else {
+                orodjaPomnilnik = data;
+            }
+            izrisiOrodja();
+        }
+
         function izrisiOrodja() {
             const vsebnik = document.getElementById('orodja-vsebina');
-            const orodja = pridobiOrodja();
             vsebnik.innerHTML = '';
 
-            VRSTNI_RED.forEach((kljucKat, i) => {
+            VRSTNI_RED_KAT.forEach((kljucKat, i) => {
                 const meta = KATEGORIJE[kljucKat];
-                const postavke = orodja.filter(o => o.kategorija === kljucKat);
+                const postavke = orodjaPomnilnik.filter(o => o.kategorija === kljucKat);
                 if (!postavke.length) return;
 
                 const blok = document.createElement('div');
-                blok.className = i < VRSTNI_RED.length - 1 ? 'mb-14' : '';
+                blok.className = i < VRSTNI_RED_KAT.length - 1 ? 'mb-14' : '';
                 blok.innerHTML = `
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-6 flex items-center gap-2">
                         <i class="fa-solid ${meta.ikona} text-xs text-${meta.barva}-400"></i>
@@ -402,8 +430,8 @@
                 vsebnik.appendChild(blok);
             });
 
-            document.querySelectorAll('[data-tool-count]').forEach(el => el.textContent = orodja.length);
-            izrisiSeznamZaUrejanje(orodja);
+            document.querySelectorAll('[data-tool-count]').forEach(el => el.textContent = orodjaPomnilnik.length);
+            izrisiSeznamZaUrejanje();
         }
 
         function kartica(o) {
@@ -422,13 +450,14 @@
                 </a>`;
         }
 
-        function izrisiSeznamZaUrejanje(orodja) {
+        function izrisiSeznamZaUrejanje() {
             const seznam = document.getElementById('orodje-seznam');
-            if (!orodja.length) {
+            if (!seznam) return;
+            if (!orodjaPomnilnik.length) {
                 seznam.innerHTML = '<p class="text-xs text-slate-500">Trenutno ni orodij.</p>';
                 return;
             }
-            seznam.innerHTML = orodja.map(o => `
+            seznam.innerHTML = orodjaPomnilnik.map(o => `
                 <div class="flex items-center justify-between gap-3 bg-slate-900/60 border border-slate-800 rounded-lg px-3 py-2">
                     <div class="min-w-0">
                         <p class="text-sm text-white font-semibold truncate">${pobegniHTML(o.naslov)}</p>
@@ -441,12 +470,15 @@
                 </div>`).join('');
         }
 
-        function shraniOrodje(dogodek) {
+        // ------- Shranjevanje v Supabase (zahteva prijavo, zavarovano tudi z RLS) -------
+        async function shraniOrodje(dogodek) {
             dogodek.preventDefault();
-            const orodja = pridobiOrodja();
+            if (!prijavljenUporabnik) { prikaziNapakoObrazca('Nisi prijavljen.'); return; }
+
             const id = document.getElementById('f-id').value;
+            const obstojeci = id ? orodjaPomnilnik.find(o => o.id === id) : null;
             const podatki = {
-                id: id || 'orodje-' + Date.now(),
+                id: id || ('orodje-' + Date.now()),
                 kategorija: document.getElementById('f-kategorija').value,
                 barva: document.getElementById('f-barva').value,
                 oznaka: document.getElementById('f-oznaka').value.trim() || 'ORODJE',
@@ -454,20 +486,26 @@
                 opis: document.getElementById('f-opis').value.trim(),
                 link: document.getElementById('f-link').value.trim(),
                 gumb: document.getElementById('f-gumb').value.trim() || 'Odpri orodje',
+                vrstni_red: obstojeci ? obstojeci.vrstni_red : (orodjaPomnilnik.length + 1),
             };
             if (!podatki.naslov || !podatki.link) return;
 
-            const obstojIndex = orodja.findIndex(o => o.id === id);
-            if (obstojIndex > -1) orodja[obstojIndex] = podatki;
-            else orodja.push(podatki);
+            const gumbShrani = dogodek.target.querySelector('button[type="submit"]');
+            gumbShrani.disabled = true;
+            const { error } = await sb.from('orodja').upsert(podatki);
+            gumbShrani.disabled = false;
 
-            shraniVShrambo(orodja);
-            izrisiOrodja();
+            if (error) { prikaziNapakoObrazca('Napaka pri shranjevanju: ' + error.message); return; }
+            await naloziOrodja();
             prekliciUrejanje();
         }
 
+        function prikaziNapakoObrazca(besedilo) {
+            alert(besedilo);
+        }
+
         function urejajOrodje(id) {
-            const o = pridobiOrodja().find(o => o.id === id);
+            const o = orodjaPomnilnik.find(o => o.id === id);
             if (!o) return;
             document.getElementById('f-id').value = o.id;
             document.getElementById('f-kategorija').value = o.kategorija;
@@ -485,24 +523,24 @@
             document.getElementById('f-id').value = '';
         }
 
-        function izbrisiOrodje(id) {
-            if (!confirm('Izbrišem to orodje s seznama?')) return;
-            const orodja = pridobiOrodja().filter(o => o.id !== id);
-            shraniVShrambo(orodja);
-            izrisiOrodja();
+        async function izbrisiOrodje(id) {
+            if (!prijavljenUporabnik) { prikaziNapakoObrazca('Nisi prijavljen.'); return; }
+            if (!confirm('Izbrišem to orodje s seznama? Sprememba je takoj vidna vsem obiskovalcem.')) return;
+            const { error } = await sb.from('orodja').delete().eq('id', id);
+            if (error) { prikaziNapakoObrazca('Napaka pri brisanju: ' + error.message); return; }
+            await naloziOrodja();
         }
 
         function izvoziOrodja() {
             const polje = document.getElementById('json-polje');
-            polje.value = JSON.stringify(pridobiOrodja(), null, 2);
+            polje.value = JSON.stringify(orodjaPomnilnik, null, 2);
             polje.classList.remove('hidden');
             polje.select();
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(polje.value).catch(() => {});
-            }
+            if (navigator.clipboard) navigator.clipboard.writeText(polje.value).catch(() => {});
         }
 
-        function uvoziOrodja() {
+        async function uvoziOrodja() {
+            if (!prijavljenUporabnik) { prikaziNapakoObrazca('Nisi prijavljen.'); return; }
             const polje = document.getElementById('json-polje');
             if (polje.classList.contains('hidden') || !polje.value.trim()) {
                 polje.classList.remove('hidden');
@@ -514,19 +552,51 @@
             try {
                 const podatki = JSON.parse(polje.value);
                 if (!Array.isArray(podatki)) throw new Error('Ni seznam');
-                if (!confirm('S tem prepišeš trenutni seznam orodij. Nadaljujem?')) return;
-                shraniVShrambo(podatki);
-                izrisiOrodja();
+                if (!confirm('S tem prepišeš celoten seznam orodij v bazi za VSE obiskovalce. Nadaljujem?')) return;
+                const { error } = await sb.from('orodja').upsert(podatki);
+                if (error) throw error;
+                await naloziOrodja();
                 polje.classList.add('hidden');
             } catch (e) {
-                alert('JSON ni veljaven. Preveri obliko in poskusi znova.');
+                alert('Uvoz ni uspel: ' + e.message);
             }
         }
 
         function ponastaviOrodja() {
-            if (!confirm('Ponastavim seznam nazaj na privzeta orodja? Tvoje lokalne spremembe bodo izgubljene.')) return;
-            localStorage.removeItem(SHRAMBA_KLJUC);
-            izrisiOrodja();
+            alert('Ponastavitev na privzeta orodja izvedi prek "Uvozi JSON" z osnovnim seznamom, ali me prosi, da ti pripravim ustrezen SQL ukaz.');
+        }
+
+        // ------- Prijava / odjava / skrit dostop do nastavitev -------
+        function odpriPrijavo() {
+            document.getElementById('prijava-overlay').classList.remove('hidden');
+        }
+        function zapriPrijavo() {
+            document.getElementById('prijava-overlay').classList.add('hidden');
+            history.replaceState(null, '', window.location.pathname);
+        }
+
+        async function prijava(dogodek) {
+            dogodek.preventDefault();
+            const email = document.getElementById('p-email').value.trim();
+            const geslo = document.getElementById('p-geslo').value;
+            const napaka = document.getElementById('p-napaka');
+            napaka.classList.add('hidden');
+
+            const { data, error } = await sb.auth.signInWithPassword({ email, password: geslo });
+            if (error) {
+                napaka.textContent = 'Napačna e-pošta ali geslo.';
+                napaka.classList.remove('hidden');
+                return;
+            }
+            prijavljenUporabnik = data.user;
+            zapriPrijavo();
+            odpriNastavitve();
+        }
+
+        async function odjava() {
+            await sb.auth.signOut();
+            prijavljenUporabnik = null;
+            zapriNastavitve();
         }
 
         function odpriNastavitve() {
@@ -536,7 +606,22 @@
             document.getElementById('nastavitve-overlay').classList.add('hidden');
         }
 
-        izrisiOrodja();
+        // Skrit dostop: naslov-strani.html#nastavitve odpre prijavo (ali kar nastavitve, če si že prijavljen)
+        async function preveriSkritoPot() {
+            if (window.location.hash !== '#nastavitve') return;
+            const { data } = await sb.auth.getSession();
+            if (data.session) {
+                prijavljenUporabnik = data.session.user;
+                odpriNastavitve();
+            } else {
+                odpriPrijavo();
+            }
+        }
+        window.addEventListener('hashchange', preveriSkritoPot);
+
+        // ------- Zagon ob nalaganju strani -------
+        naloziOrodja();
+        preveriSkritoPot();
     </script>
 
 </body>
