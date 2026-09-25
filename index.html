@@ -299,16 +299,69 @@
             </p>
             <p id="nastavitve-status" class="hidden text-xs rounded-lg px-3 py-2 mb-6 leading-relaxed"></p>
 
+            <!-- SKLOPI (KATEGORIJE) ORODIJ -->
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Sklopi (kategorije) orodij</h4>
+            <div id="kategorija-seznam" class="space-y-2 mb-3"></div>
+            <form id="kategorija-obrazec" class="grid sm:grid-cols-4 gap-3 mb-8 items-end" onsubmit="shraniKategorijo(event)">
+                <input type="hidden" id="k-id">
+                <div class="sm:col-span-2">
+                    <label class="text-xs text-slate-400 font-semibold">Naslov sklopa</label>
+                    <input id="k-naslov" placeholder="npr. Fotografija" required class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Ikona</label>
+                    <select id="k-ikona" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                        <option value="fa-microchip">Čip / tehnika</option>
+                        <option value="fa-gears">Zobniki / mehanika</option>
+                        <option value="fa-chart-line">Graf / finance</option>
+                        <option value="fa-compass">Kompas / razno</option>
+                        <option value="fa-code">Koda</option>
+                        <option value="fa-flask">Znanost</option>
+                        <option value="fa-car">Avto</option>
+                        <option value="fa-utensils">Kulinarika</option>
+                        <option value="fa-dumbbell">Šport</option>
+                        <option value="fa-gamepad">Igre</option>
+                        <option value="fa-camera">Fotografija</option>
+                        <option value="fa-house">Dom</option>
+                        <option value="fa-plane">Potovanja</option>
+                        <option value="fa-music">Glasba</option>
+                        <option value="fa-paintbrush">Umetnost</option>
+                        <option value="fa-book">Izobraževanje</option>
+                        <option value="fa-heart">Zdravje</option>
+                        <option value="fa-globe">Splet</option>
+                        <option value="fa-bolt">Energija</option>
+                        <option value="fa-leaf">Narava</option>
+                        <option value="fa-shield">Varnost</option>
+                        <option value="fa-tools">Orodja splošno</option>
+                        <option value="fa-star">Priljubljeno</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-slate-400 font-semibold">Barva</label>
+                    <select id="k-barva" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                        <option value="blue">Modra</option>
+                        <option value="emerald">Zelena</option>
+                        <option value="amber">Rumena/zlata</option>
+                        <option value="indigo">Indigo</option>
+                        <option value="rose">Rožnata</option>
+                        <option value="violet">Vijolična</option>
+                        <option value="cyan">Cian</option>
+                        <option value="orange">Oranžna</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-4 flex items-center gap-3">
+                    <button type="submit" class="px-5 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition">Shrani sklop</button>
+                    <button type="button" onclick="prekliciUrejanjeKategorije()" class="px-5 py-2 rounded-full bg-slate-900 border border-slate-700 hover:border-slate-500 text-white text-xs font-semibold transition">Prekliči</button>
+                </div>
+            </form>
+
             <!-- Obrazec za dodajanje / urejanje -->
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Dodaj / uredi orodje</h4>
             <form id="orodje-obrazec" class="grid sm:grid-cols-2 gap-3 mb-6" onsubmit="shraniOrodje(event)">
                 <input type="hidden" id="f-id">
                 <div class="sm:col-span-1">
                     <label class="text-xs text-slate-400 font-semibold">Kategorija</label>
-                    <select id="f-kategorija" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
-                        <option value="inzenirstvo">Inženirstvo & Industrija</option>
-                        <option value="finance">Tržni Sledilniki & Finance</option>
-                        <option value="prosticas">Prosti Čas & Razni Projekti</option>
-                    </select>
+                    <select id="f-kategorija" class="w-full mt-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white"></select>
                 </div>
                 <div class="sm:col-span-1">
                     <label class="text-xs text-slate-400 font-semibold">Barva oznake</label>
@@ -385,20 +438,41 @@
             { id: 'prostor-avtodom', kategorija: 'prosticas', barva: 'indigo', oznaka: 'SPLETNA STRAN', naslov: 'Prostor za avtodom', opis: 'Predstavitvena stran za hrambo in zimovanje avtodomov v Celju.', link: 'https://robifilipsek-dev.github.io/zimovanje-hramba-avtodomov-prikolic-celje/', gumb: 'Odpri stran', vrstni_red: 12 },
         ];
 
-        const KATEGORIJE = {
-            inzenirstvo: { naslov: 'Inženirstvo & Industrija', ikona: 'fa-microchip', barva: 'blue' },
-            finance:     { naslov: 'Tržni Sledilniki & Finance', ikona: 'fa-chart-line', barva: 'emerald' },
-            prosticas:   { naslov: 'Prosti Čas & Razni Projekti', ikona: 'fa-compass', barva: 'indigo' },
-        };
-        const VRSTNI_RED_KAT = ['inzenirstvo', 'finance', 'prosticas'];
+        const KATEGORIJE_PRIVZETO = [
+            { id: 'inzenirstvo', naslov: 'Inženirstvo & Industrija', ikona: 'fa-microchip', barva: 'blue', vrstni_red: 1 },
+            { id: 'finance',     naslov: 'Tržni Sledilniki & Finance', ikona: 'fa-chart-line', barva: 'emerald', vrstni_red: 2 },
+            { id: 'prosticas',   naslov: 'Prosti Čas & Razni Projekti', ikona: 'fa-compass', barva: 'indigo', vrstni_red: 3 },
+        ];
 
-        let orodjaPomnilnik = [];   // zadnji naloženi seznam orodij (za izris in urejanje)
+        let orodjaPomnilnik = [];      // zadnji naloženi seznam orodij (za izris in urejanje)
+        let kategorijePomnilnik = [];  // zadnji naloženi seznam sklopov/kategorij
         let prijavljenUporabnik = null;
 
         function pobegniHTML(niz) {
             const div = document.createElement('div');
             div.textContent = niz == null ? '' : String(niz);
             return div.innerHTML;
+        }
+
+        // ------- Branje kategorij (sklopov) iz Supabase -------
+        async function naloziKategorije() {
+            const { data, error } = await sb.from('kategorije').select('*').order('vrstni_red', { ascending: true });
+            if (error) {
+                console.error('Napaka pri branju kategorij:', error);
+                kategorijePomnilnik = KATEGORIJE_PRIVZETO.slice();
+            } else {
+                kategorijePomnilnik = data.length ? data : KATEGORIJE_PRIVZETO.slice();
+            }
+            posodobiKategorijaSelect();
+            izrisiKategorijeZaUrejanje();
+        }
+
+        function posodobiKategorijaSelect() {
+            const select = document.getElementById('f-kategorija');
+            if (!select) return;
+            const trenutna = select.value;
+            select.innerHTML = kategorijePomnilnik.map(k => `<option value="${pobegniHTML(k.id)}">${pobegniHTML(k.naslov)}</option>`).join('');
+            if (trenutna && kategorijePomnilnik.some(k => k.id === trenutna)) select.value = trenutna;
         }
 
         // ------- Branje orodij iz Supabase (javno, ne rabi prijave) -------
@@ -421,17 +495,16 @@
             const vsebnik = document.getElementById('orodja-vsebina');
             vsebnik.innerHTML = '';
 
-            VRSTNI_RED_KAT.forEach((kljucKat, i) => {
-                const meta = KATEGORIJE[kljucKat];
-                const postavke = orodjaPomnilnik.filter(o => o.kategorija === kljucKat);
+            kategorijePomnilnik.forEach((meta, i) => {
+                const postavke = orodjaPomnilnik.filter(o => o.kategorija === meta.id);
                 if (!postavke.length) return;
 
                 const blok = document.createElement('div');
-                blok.className = i < VRSTNI_RED_KAT.length - 1 ? 'mb-14' : '';
+                blok.className = i < kategorijePomnilnik.length - 1 ? 'mb-14' : '';
                 blok.innerHTML = `
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-6 flex items-center gap-2">
                         <i class="fa-solid ${meta.ikona} text-xs text-${meta.barva}-400"></i>
-                        <span>${meta.naslov}</span>
+                        <span>${pobegniHTML(meta.naslov)}</span>
                     </h3>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         ${postavke.map(o => kartica(o)).join('')}
@@ -470,13 +543,93 @@
                 <div class="flex items-center justify-between gap-3 bg-slate-900/60 border border-slate-800 rounded-lg px-3 py-2">
                     <div class="min-w-0">
                         <p class="text-sm text-white font-semibold truncate">${pobegniHTML(o.naslov)}</p>
-                        <p class="text-[11px] text-slate-500 truncate">${pobegniHTML(KATEGORIJE[o.kategorija]?.naslov || o.kategorija)}</p>
+                        <p class="text-[11px] text-slate-500 truncate">${pobegniHTML((kategorijePomnilnik.find(k => k.id === o.kategorija) || {}).naslov || o.kategorija)}</p>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
                         <button onclick="urejajOrodje('${o.id}')" class="w-7 h-7 rounded-full hover:bg-slate-800 text-slate-400 hover:text-blue-400 flex items-center justify-center transition"><i class="fa-solid fa-pen text-xs"></i></button>
                         <button onclick="izbrisiOrodje('${o.id}')" class="w-7 h-7 rounded-full hover:bg-slate-800 text-slate-400 hover:text-red-400 flex items-center justify-center transition"><i class="fa-solid fa-trash text-xs"></i></button>
                     </div>
                 </div>`).join('');
+        }
+
+        // ------- Sklopi (kategorije): izris seznama za urejanje -------
+        function izrisiKategorijeZaUrejanje() {
+            const seznam = document.getElementById('kategorija-seznam');
+            if (!seznam) return;
+            seznam.innerHTML = kategorijePomnilnik.map(k => `
+                <div class="flex items-center justify-between gap-3 bg-slate-900/60 border border-slate-800 rounded-lg px-3 py-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <i class="fa-solid ${k.ikona} text-${k.barva}-400 text-sm w-4 text-center"></i>
+                        <p class="text-sm text-white font-semibold truncate">${pobegniHTML(k.naslov)}</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="urejajKategorijo('${k.id}')" class="w-7 h-7 rounded-full hover:bg-slate-800 text-slate-400 hover:text-blue-400 flex items-center justify-center transition"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="izbrisiKategorijo('${k.id}')" class="w-7 h-7 rounded-full hover:bg-slate-800 text-slate-400 hover:text-red-400 flex items-center justify-center transition"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>`).join('');
+        }
+
+        function ustvariID(besedilo) {
+            return besedilo.toLowerCase()
+                .replace(/š/g, 's').replace(/č/g, 'c').replace(/ž/g, 'z').replace(/đ/g, 'dj').replace(/ć/g, 'c')
+                .replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '') || ('sklop-' + Date.now());
+        }
+
+        async function shraniKategorijo(dogodek) {
+            dogodek.preventDefault();
+            const prijavljen = await preveriPrijavoSveze();
+            if (!prijavljen) { prikaziStatus('Nisi (več) prijavljen. Prijavi se znova prek #nastavitve.', 'napaka'); zapriNastavitve(); odpriPrijavo(); return; }
+
+            const obstojeciId = document.getElementById('k-id').value;
+            const naslov = document.getElementById('k-naslov').value.trim();
+            if (!naslov) return;
+
+            const podatki = {
+                id: obstojeciId || ustvariID(naslov),
+                naslov: naslov,
+                ikona: document.getElementById('k-ikona').value,
+                barva: document.getElementById('k-barva').value,
+                vrstni_red: obstojeciId
+                    ? (kategorijePomnilnik.find(k => k.id === obstojeciId)?.vrstni_red ?? kategorijePomnilnik.length + 1)
+                    : kategorijePomnilnik.length + 1,
+            };
+
+            const { error } = await sb.from('kategorije').upsert(podatki);
+            if (error) { console.error('Napaka pri shranjevanju sklopa:', error); prikaziStatus('Napaka pri shranjevanju sklopa: ' + error.message, 'napaka'); return; }
+            prikaziStatus('Sklop je shranjen.', 'uspeh');
+            await naloziKategorije();
+            await naloziOrodja();
+            prekliciUrejanjeKategorije();
+        }
+
+        function urejajKategorijo(id) {
+            const k = kategorijePomnilnik.find(k => k.id === id);
+            if (!k) return;
+            document.getElementById('k-id').value = k.id;
+            document.getElementById('k-naslov').value = k.naslov;
+            document.getElementById('k-ikona').value = k.ikona;
+            document.getElementById('k-barva').value = k.barva;
+        }
+
+        function prekliciUrejanjeKategorije() {
+            document.getElementById('kategorija-obrazec').reset();
+            document.getElementById('k-id').value = '';
+        }
+
+        async function izbrisiKategorijo(id) {
+            const prijavljen = await preveriPrijavoSveze();
+            if (!prijavljen) { prikaziStatus('Nisi (več) prijavljen. Prijavi se znova prek #nastavitve.', 'napaka'); zapriNastavitve(); odpriPrijavo(); return; }
+
+            const steviloOrodij = orodjaPomnilnik.filter(o => o.kategorija === id).length;
+            if (steviloOrodij > 0) {
+                prikaziStatus(`Tega sklopa ni mogoče izbrisati, ker vsebuje ${steviloOrodij} orodij/j. Najprej jih prestavi v drug sklop ali izbriši.`, 'napaka');
+                return;
+            }
+            if (!confirm('Izbrišem ta sklop?')) return;
+            const { error } = await sb.from('kategorije').delete().eq('id', id);
+            if (error) { console.error('Napaka pri brisanju sklopa:', error); prikaziStatus('Napaka pri brisanju sklopa: ' + error.message, 'napaka'); return; }
+            prikaziStatus('Sklop je izbrisan.', 'uspeh');
+            await naloziKategorije();
         }
 
         // ------- Shranjevanje v Supabase (zahteva prijavo, zavarovano tudi z RLS) -------
@@ -662,8 +815,11 @@
         });
 
         // ------- Zagon ob nalaganju strani -------
-        naloziOrodja();
-        preveriSkritoPot();
+        (async function zagon() {
+            await naloziKategorije();
+            await naloziOrodja();
+            await preveriSkritoPot();
+        })();
     </script>
 
 </body>
