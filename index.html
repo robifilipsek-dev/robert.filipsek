@@ -210,6 +210,9 @@
                 </p>
             </div>
 
+            <!-- Vidno opozorilo, če branje iz baze ne uspe -->
+            <div id="orodja-napaka" class="hidden mb-8 text-xs text-red-300 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 leading-relaxed"></div>
+
             <!-- Sem JavaScript izriše kategorije in kartice orodij iz podatkov (glej <script> pri dnu strani) -->
             <div id="orodja-vsebina"></div>
 
@@ -289,10 +292,12 @@
                     <button onclick="zapriNastavitve()" class="w-8 h-8 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
-            <p class="text-xs text-emerald-300/90 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2 mb-6 leading-relaxed">
+            <p id="prijavljen-kot" class="text-xs text-slate-500 mb-3"></p>
+            <p class="text-xs text-emerald-300/90 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2 mb-3 leading-relaxed">
                 <i class="fa-solid fa-circle-check mr-1"></i>
                 Spremembe se shranijo v bazo (Supabase) in so takoj vidne vsem obiskovalcem strani. Za urejanje moraš biti prijavljen.
             </p>
+            <p id="nastavitve-status" class="hidden text-xs rounded-lg px-3 py-2 mb-6 leading-relaxed"></p>
 
             <!-- Obrazec za dodajanje / urejanje -->
             <form id="orodje-obrazec" class="grid sm:grid-cols-2 gap-3 mb-6" onsubmit="shraniOrodje(event)">
@@ -398,12 +403,16 @@
 
         // ------- Branje orodij iz Supabase (javno, ne rabi prijave) -------
         async function naloziOrodja() {
+            const banner = document.getElementById('orodja-napaka');
             const { data, error } = await sb.from('orodja').select('*').order('vrstni_red', { ascending: true });
             if (error) {
-                console.warn('Napaka pri branju iz Supabase, uporabljam rezervni seznam:', error.message);
+                console.error('Napaka pri branju iz Supabase:', error);
                 orodjaPomnilnik = PRIVZETA_ORODJA.slice();
+                banner.textContent = '⚠ Trenutno prikazujem rezervni (privzeti) seznam orodij, ker povezava z bazo ni uspela: ' + error.message + '. Preveri, da si v Supabase ustvaril tabelo "orodja" in pravila dostopa (RLS) natanko po navodilih.';
+                banner.classList.remove('hidden');
             } else {
                 orodjaPomnilnik = data;
+                banner.classList.add('hidden');
             }
             izrisiOrodja();
         }
@@ -473,7 +482,8 @@
         // ------- Shranjevanje v Supabase (zahteva prijavo, zavarovano tudi z RLS) -------
         async function shraniOrodje(dogodek) {
             dogodek.preventDefault();
-            if (!prijavljenUporabnik) { prikaziNapakoObrazca('Nisi prijavljen.'); return; }
+            const prijavljen = await preveriPrijavoSveze();
+            if (!prijavljen) { prikaziStatus('Nisi (več) prijavljen. Prijavi se znova prek #nastavitve.', 'napaka'); zapriNastavitve(); odpriPrijavo(); return; }
 
             const id = document.getElementById('f-id').value;
             const obstojeci = id ? orodjaPomnilnik.find(o => o.id === id) : null;
@@ -488,20 +498,41 @@
                 gumb: document.getElementById('f-gumb').value.trim() || 'Odpri orodje',
                 vrstni_red: obstojeci ? obstojeci.vrstni_red : (orodjaPomnilnik.length + 1),
             };
-            if (!podatki.naslov || !podatki.link) return;
+            if (!podatki.naslov || !podatki.link) { prikaziStatus('Naslov in povezava sta obvezna.', 'napaka'); return; }
 
             const gumbShrani = dogodek.target.querySelector('button[type="submit"]');
             gumbShrani.disabled = true;
             const { error } = await sb.from('orodja').upsert(podatki);
             gumbShrani.disabled = false;
 
-            if (error) { prikaziNapakoObrazca('Napaka pri shranjevanju: ' + error.message); return; }
+            if (error) { console.error('Napaka pri shranjevanju:', error); prikaziStatus('Napaka pri shranjevanju: ' + error.message, 'napaka'); return; }
+            prikaziStatus('Orodje je shranjeno in takoj vidno vsem obiskovalcem.', 'uspeh');
             await naloziOrodja();
             prekliciUrejanje();
         }
 
-        function prikaziNapakoObrazca(besedilo) {
-            alert(besedilo);
+        function prikaziStatus(besedilo, vrsta) {
+            const el = document.getElementById('nastavitve-status');
+            el.textContent = besedilo;
+            el.className = vrsta === 'uspeh'
+                ? 'text-xs rounded-lg px-3 py-2 mb-6 leading-relaxed text-emerald-300 bg-emerald-500/10 border border-emerald-500/30'
+                : 'text-xs rounded-lg px-3 py-2 mb-6 leading-relaxed text-red-300 bg-red-500/10 border border-red-500/30';
+            el.classList.remove('hidden');
+        }
+
+        // Vedno znova preveri pri Supabase, ali je seja res še veljavna (ne zaupaj samo lokalni spremenljivki)
+        async function preveriPrijavoSveze() {
+            const { data, error } = await sb.auth.getSession();
+            if (error || !data.session) { prijavljenUporabnik = null; posodobiPrijavniStatus(); return false; }
+            prijavljenUporabnik = data.session.user;
+            posodobiPrijavniStatus();
+            return true;
+        }
+
+        function posodobiPrijavniStatus() {
+            const el = document.getElementById('prijavljen-kot');
+            if (!el) return;
+            el.textContent = prijavljenUporabnik ? ('Prijavljen kot: ' + prijavljenUporabnik.email) : 'Nisi prijavljen.';
         }
 
         function urejajOrodje(id) {
@@ -524,10 +555,12 @@
         }
 
         async function izbrisiOrodje(id) {
-            if (!prijavljenUporabnik) { prikaziNapakoObrazca('Nisi prijavljen.'); return; }
+            const prijavljen = await preveriPrijavoSveze();
+            if (!prijavljen) { prikaziStatus('Nisi (več) prijavljen. Prijavi se znova prek #nastavitve.', 'napaka'); zapriNastavitve(); odpriPrijavo(); return; }
             if (!confirm('Izbrišem to orodje s seznama? Sprememba je takoj vidna vsem obiskovalcem.')) return;
             const { error } = await sb.from('orodja').delete().eq('id', id);
-            if (error) { prikaziNapakoObrazca('Napaka pri brisanju: ' + error.message); return; }
+            if (error) { console.error('Napaka pri brisanju:', error); prikaziStatus('Napaka pri brisanju: ' + error.message, 'napaka'); return; }
+            prikaziStatus('Orodje je izbrisano.', 'uspeh');
             await naloziOrodja();
         }
 
@@ -540,7 +573,8 @@
         }
 
         async function uvoziOrodja() {
-            if (!prijavljenUporabnik) { prikaziNapakoObrazca('Nisi prijavljen.'); return; }
+            const prijavljen = await preveriPrijavoSveze();
+            if (!prijavljen) { prikaziStatus('Nisi (več) prijavljen. Prijavi se znova prek #nastavitve.', 'napaka'); zapriNastavitve(); odpriPrijavo(); return; }
             const polje = document.getElementById('json-polje');
             if (polje.classList.contains('hidden') || !polje.value.trim()) {
                 polje.classList.remove('hidden');
@@ -555,10 +589,12 @@
                 if (!confirm('S tem prepišeš celoten seznam orodij v bazi za VSE obiskovalce. Nadaljujem?')) return;
                 const { error } = await sb.from('orodja').upsert(podatki);
                 if (error) throw error;
+                prikaziStatus('Uvoz je uspel.', 'uspeh');
                 await naloziOrodja();
                 polje.classList.add('hidden');
             } catch (e) {
-                alert('Uvoz ni uspel: ' + e.message);
+                console.error('Napaka pri uvozu:', e);
+                prikaziStatus('Uvoz ni uspel: ' + e.message, 'napaka');
             }
         }
 
@@ -584,13 +620,15 @@
 
             const { data, error } = await sb.auth.signInWithPassword({ email, password: geslo });
             if (error) {
-                napaka.textContent = 'Napačna e-pošta ali geslo.';
+                console.error('Napaka pri prijavi:', error);
+                napaka.textContent = 'Napačna e-pošta ali geslo (' + error.message + ').';
                 napaka.classList.remove('hidden');
                 return;
             }
             prijavljenUporabnik = data.user;
+            posodobiPrijavniStatus();
             zapriPrijavo();
-            odpriNastavitve();
+            document.getElementById('nastavitve-overlay').classList.remove('hidden');
         }
 
         async function odjava() {
@@ -599,25 +637,29 @@
             zapriNastavitve();
         }
 
-        function odpriNastavitve() {
-            document.getElementById('nastavitve-overlay').classList.remove('hidden');
-        }
+        // Ta funkcija se kliče SAMO, ko je seja pravkar preverjena (glej odpriPrijavo/preveriSkritoPot) —
+        // nikoli je ne kliči neposredno iz gumbov na javnem delu strani.
         function zapriNastavitve() {
             document.getElementById('nastavitve-overlay').classList.add('hidden');
         }
 
-        // Skrit dostop: naslov-strani.html#nastavitve odpre prijavo (ali kar nastavitve, če si že prijavljen)
+        // Skrit dostop: naslov-strani.html#nastavitve odpre prijavo (ali kar nastavitve, če je seja res veljavna)
         async function preveriSkritoPot() {
             if (window.location.hash !== '#nastavitve') return;
-            const { data } = await sb.auth.getSession();
-            if (data.session) {
-                prijavljenUporabnik = data.session.user;
-                odpriNastavitve();
+            const prijavljen = await preveriPrijavoSveze();
+            if (prijavljen) {
+                document.getElementById('nastavitve-overlay').classList.remove('hidden');
             } else {
                 odpriPrijavo();
             }
         }
         window.addEventListener('hashchange', preveriSkritoPot);
+
+        // Drži prijavni status vedno usklajen z dejansko sejo (npr. če seja poteče)
+        sb.auth.onAuthStateChange((_dogodek, seja) => {
+            prijavljenUporabnik = seja ? seja.user : null;
+            posodobiPrijavniStatus();
+        });
 
         // ------- Zagon ob nalaganju strani -------
         naloziOrodja();
