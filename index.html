@@ -111,10 +111,6 @@
                         Ukvarjam se z načrtovanjem industrijske avtomatizacije ter razvojem hitrih in uporabnih spletnih orodij ter aplikacij za vsakodnevno uporabo.
                     </p>
 
-                    <p class="text-sm text-slate-400 font-medium">
-                        V prostem času sem doslej razvil že <span class="text-blue-400 font-bold" data-tool-count>10</span>+ takšnih orodij – nekaj jih najdeš spodaj.
-                    </p>
-
                     <div class="pt-2 flex flex-wrap items-center gap-4">
                         <a href="#orodja" class="px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition shadow-lg shadow-blue-600/30 flex items-center gap-2">
                             <span>Aplikacije in orodja</span>
@@ -626,8 +622,6 @@
                     </div>`;
                 vsebnik.appendChild(blok);
             });
-
-            document.querySelectorAll('[data-tool-count]').forEach(el => el.textContent = orodjaPomnilnik.filter(o => o.kategorija !== 'storitve').length);
             izrisiSeznamZaUrejanje();
         }
 
