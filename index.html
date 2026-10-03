@@ -112,7 +112,7 @@
                     </p>
 
                     <p class="text-sm text-slate-400 font-medium">
-                        V prostem času sem doslej razvil že <span class="text-blue-400 font-bold" data-tool-count>12</span>+ takšnih orodij – nekaj jih najdeš spodaj.
+                        V prostem času sem doslej razvil že <span class="text-blue-400 font-bold" data-tool-count>10</span>+ takšnih orodij – nekaj jih najdeš spodaj.
                     </p>
 
                     <div class="pt-2 flex flex-wrap items-center gap-4">
@@ -472,24 +472,30 @@
 
         // Rezervni seznam, če baza trenutno ni dosegljiva (npr. brez interneta)
         const PRIVZETA_ORODJA = [
-            { id: 'kalkulator-pogonov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'POGONI', naslov: 'Kalkulator pogonov', opis: 'Hitro in natančno dimenzioniranje mehanskih pogonskih sistemov.', link: 'https://robifilipsek-dev.github.io/kalkulator-mehanskih-pogonov/', gumb: 'Odpri kalkulator', vrstni_red: 1 },
-            { id: 'analiza-takta', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ROBOTIKA', naslov: 'Analiza takta', opis: 'Izračun cikličnega časa in avtomatiziranih procesnih linij.', link: 'https://robifilipsek-dev.github.io/cikel-cas/', gumb: 'Odpri orodje', vrstni_red: 2 },
-            { id: 'varnostna-razdalja', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'VARNOST / ISO', naslov: 'Varnostna razdalja', opis: 'Izračun ustreznih varnostnih razdalj po industrijskih standardih.', link: 'https://robifilipsek-dev.github.io/varnostna-razdalja/', gumb: 'Odpri orodje', vrstni_red: 3 },
-            { id: 'kalkulator-ujemov', kategorija: 'inzenirstvo', barva: 'blue', oznaka: 'ISO 286', naslov: 'Kalkulator ujemov', opis: 'Izračun toleranc, odstopanj in vrst ujemov za gredi ter izvrtine.', link: 'https://robifilipsek-dev.github.io/kalkulator-ujemov/', gumb: 'Odpri orodje', vrstni_red: 4 },
-            { id: 'sledilnik-zlata', kategorija: 'finance', barva: 'amber', oznaka: 'PLEMENITE KOVINE', naslov: 'Sledilnik zlata', opis: 'Spremljanje tržnih cen zlata in plemenitih kovin.', link: 'https://robifilipsek-dev.github.io/zlato-tracker/', gumb: 'Odpri orodje', vrstni_red: 5 },
-            { id: 'sledilnik-bitcoina', kategorija: 'finance', barva: 'amber', oznaka: 'KRIPTO', naslov: 'Sledilnik bitcoina', opis: 'Pregled gibanja cene Bitcoina v realnem času.', link: 'https://robifilipsek-dev.github.io/bitcoin-tracker/', gumb: 'Odpri orodje', vrstni_red: 6 },
-            { id: 'sledilnik-dizla', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik dizla', opis: 'Spremljanje cen dizelskega goriva in trendov sprememb.', link: 'https://robifilipsek-dev.github.io/cena-dizla/', gumb: 'Odpri orodje', vrstni_red: 7 },
-            { id: 'sledilnik-bencina', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Sledilnik bencina', opis: 'Aktualni pregled cen bencina na črpalkah po Sloveniji.', link: 'https://robifilipsek-dev.github.io/cena-bencina/', gumb: 'Odpri orodje', vrstni_red: 8 },
-            { id: 'kalkulator-testo', kategorija: 'prosticas', barva: 'indigo', oznaka: 'KULINARIKA', naslov: 'Kalkulator za testo', opis: 'Natančen izračun hidracije, moke in kvasa za pice ter kruh.', link: 'https://robifilipsek-dev.github.io/pizza-testo/', gumb: 'Odpri orodje', vrstni_red: 9 },
-            { id: 'sport-prehrana', kategorija: 'prosticas', barva: 'indigo', oznaka: 'FITNES & ZDRAVJE', naslov: 'Šport in prehrana', opis: 'Aplikacija za enostavno beleženje treningov in vnosa hrane.', link: 'https://robifilipsek-dev.github.io/sportni-sledilnik/', gumb: 'Odpri orodje', vrstni_red: 10 },
-            { id: 'flappy-runner', kategorija: 'prosticas', barva: 'indigo', oznaka: 'MINI IGRA', naslov: 'Flappy Runner', opis: 'Zabavna spletna mini igra za sprostitev med odmori.', link: 'https://robifilipsek-dev.github.io/flappy-runner/', gumb: 'Odpri igro', vrstni_red: 11 },
-            { id: 'prostor-avtodom', kategorija: 'prosticas', barva: 'indigo', oznaka: 'SPLETNA STRAN', naslov: 'Prostor za avtodom', opis: 'Predstavitvena stran za hrambo in zimovanje avtodomov v Celju.', link: 'https://robifilipsek-dev.github.io/zimovanje-hramba-avtodomov-prikolic-celje/', gumb: 'Odpri stran', vrstni_red: 12 },
+            // --- Moje storitve ---
+            { id: 'rf-digital', kategorija: 'storitve', barva: 'blue', oznaka: 'STORITVE', naslov: 'RF Digital', opis: 'Moja spletna stran s storitvami: izdelava sodobnih spletnih strani, enostavna avtomatizacija opravil ter spletne aplikacije in orodja po meri za mala podjetja in obrtnike.', link: 'https://robifilipsek-dev.github.io/RF-Digital/', gumb: 'Obišči RF Digital', vrstni_red: 1 },
+            // --- Finance in cene goriva ---
+            { id: 'sledilnik-zlata', kategorija: 'finance', barva: 'amber', oznaka: 'PLEMENITE KOVINE', naslov: 'Sledilnik zlata', opis: 'Cena zlata v €/g, vrednost standardnih tež in osebni portfelj z izračunom dobička ter donosnosti.', link: 'https://robifilipsek-dev.github.io/zlato-tracker/', gumb: 'Odpri aplikacijo', vrstni_red: 2 },
+            { id: 'sledilnik-bitcoina', kategorija: 'finance', barva: 'amber', oznaka: 'KRIPTO', naslov: 'Sledilnik bitcoina', opis: 'Cena Bitcoina v EUR z grafom gibanja, vrednostjo deležev ter osebnim portfeljem z donosnostjo.', link: 'https://robifilipsek-dev.github.io/bitcoin-tracker/', gumb: 'Odpri aplikacijo', vrstni_red: 3 },
+            { id: 'cena-goriva', kategorija: 'finance', barva: 'emerald', oznaka: 'GORIVO', naslov: 'Izračun cene goriva', opis: 'Izračun zneska za plačilo z upoštevanjem popusta na liter, z zgodovino cen dizla in bencina 95 (GOV.SI).', link: 'https://robifilipsek-dev.github.io/cena-goriva/', gumb: 'Odpri aplikacijo', vrstni_red: 4 },
+            // --- Umetna inteligenca ---
+            { id: 'dnevna-iskra', kategorija: 'ai', barva: 'indigo', oznaka: 'AI / NAVDIH', naslov: 'Dnevna iskra', opis: 'Dnevna porcija modrosti in navdiha, ustvarjena z umetno inteligenco, s kategorijami, zgodovino in priljubljenimi iskrami.', link: 'https://robifilipsek-dev.github.io/dnevna-iskra/', gumb: 'Odpri aplikacijo', vrstni_red: 5 },
+            { id: 'lifeflow-ai', kategorija: 'ai', barva: 'indigo', oznaka: 'AI POMOČNIK', naslov: 'LifeFlow AI', opis: 'Osebni AI pomočnik za organizacijo dneva: računi, hladilnik, opravila in dnevni načrt na enem mestu.', link: 'https://robifilipsek-dev.github.io/lifeflow-ai/', gumb: 'Odpri aplikacijo', vrstni_red: 6 },
+            // --- Hrana, šport in vsakdan ---
+            { id: 'kalkulator-testo', kategorija: 'vsakdan', barva: 'emerald', oznaka: 'KULINARIKA', naslov: 'Kalkulator za testo', opis: 'Izračun hidracije, kvasa in fermentacije za popolno pizzo.', link: 'https://robifilipsek-dev.github.io/pizza-testo/', gumb: 'Odpri aplikacijo', vrstni_red: 7 },
+            { id: 'obracun-mesa', kategorija: 'vsakdan', barva: 'emerald', oznaka: 'KMETIJA', naslov: 'Obračun mesa', opis: 'Izračun in evidenca klanja: cenik po kosih mesa, računi za stranke, statistika in tržne cene govedine.', link: 'https://robifilipsek-dev.github.io/obracun-mesa/', gumb: 'Odpri aplikacijo', vrstni_red: 8 },
+            { id: 'sport-prehrana', kategorija: 'vsakdan', barva: 'emerald', oznaka: 'FITNES & ZDRAVJE', naslov: 'Šport in prehrana', opis: 'Dnevnik aktivnosti, obrokov, vode in telesne teže z izračunom porabe kalorij ter AI oceno iz opisa ali slike.', link: 'https://robifilipsek-dev.github.io/sportni-sledilnik/', gumb: 'Odpri aplikacijo', vrstni_red: 9 },
+            // --- Spletne strani in rezervacije ---
+            { id: 'tenis-ponikva', kategorija: 'splet', barva: 'blue', oznaka: 'REZERVACIJE', naslov: 'Tenis Ponikva', opis: 'Spletna rezervacija terminov za peščeni igrišči z dnevno in tedensko kvoto ter pregledom lastnih rezervacij.', link: 'https://robifilipsek-dev.github.io/tenis-ponikva/', gumb: 'Odpri aplikacijo', vrstni_red: 10 },
+            { id: 'prostor-avtodom', kategorija: 'splet', barva: 'blue', oznaka: 'SPLETNA STRAN', naslov: 'Prostor za avtodom', opis: 'Spletna stran za zimovanje in hrambo avtodomov ter prikolic v okolici Celja.', link: 'https://robifilipsek-dev.github.io/zimovanje-hramba-avtodomov-prikolic-celje/', gumb: 'Odpri stran', vrstni_red: 11 },
         ];
 
         const KATEGORIJE_PRIVZETO = [
-            { id: 'inzenirstvo', naslov: 'Inženirstvo & Industrija', ikona: 'fa-microchip', barva: 'blue', vrstni_red: 1 },
-            { id: 'finance',     naslov: 'Tržni Sledilniki & Finance', ikona: 'fa-chart-line', barva: 'emerald', vrstni_red: 2 },
-            { id: 'prosticas',   naslov: 'Prosti Čas & Razni Projekti', ikona: 'fa-compass', barva: 'indigo', vrstni_red: 3 },
+            { id: 'storitve', naslov: 'Moje storitve', ikona: 'fa-code', barva: 'blue', vrstni_red: 1 },
+            { id: 'finance',  naslov: 'Finance & Cene goriva', ikona: 'fa-chart-line', barva: 'amber', vrstni_red: 2 },
+            { id: 'ai',       naslov: 'Umetna inteligenca', ikona: 'fa-microchip', barva: 'violet', vrstni_red: 3 },
+            { id: 'vsakdan',  naslov: 'Hrana, šport & kmetija', ikona: 'fa-dumbbell', barva: 'emerald', vrstni_red: 4 },
+            { id: 'splet',    naslov: 'Spletne strani & rezervacije', ikona: 'fa-globe', barva: 'cyan', vrstni_red: 5 },
         ];
 
         const VSEBINA_PRIVZETO = {
@@ -615,14 +621,31 @@
                         <i class="fa-solid ${meta.ikona} text-xs text-${meta.barva}-400"></i>
                         <span>${pobegniHTML(meta.naslov)}</span>
                     </h3>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        ${postavke.map(o => kartica(o)).join('')}
+                    <div class="${meta.id === 'storitve' ? 'grid gap-4' : 'grid sm:grid-cols-2 lg:grid-cols-4 gap-4'}">
+                        ${postavke.map(o => meta.id === 'storitve' ? karticaSirska(o) : kartica(o)).join('')}
                     </div>`;
                 vsebnik.appendChild(blok);
             });
 
-            document.querySelectorAll('[data-tool-count]').forEach(el => el.textContent = orodjaPomnilnik.length);
+            document.querySelectorAll('[data-tool-count]').forEach(el => el.textContent = orodjaPomnilnik.filter(o => o.kategorija !== 'storitve').length);
             izrisiSeznamZaUrejanje();
+        }
+
+        // Široka kartica za storitve (RF Digital)
+        function karticaSirska(o) {
+            const barva = o.barva || 'blue';
+            return `
+                <a href="${pobegniHTML(o.link)}" target="_blank" class="minimal-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-6 group">
+                    <div class="max-w-2xl">
+                        <span class="text-[11px] font-mono font-bold text-${barva}-400">${pobegniHTML(o.oznaka)}</span>
+                        <h4 class="text-xl font-bold text-white group-hover:text-${barva}-300 transition mt-1 mb-2">${pobegniHTML(o.naslov)}</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">${pobegniHTML(o.opis)}</p>
+                    </div>
+                    <span class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-${barva}-600 group-hover:bg-${barva}-500 text-white text-sm font-semibold transition self-start sm:self-center">
+                        <span>${pobegniHTML(o.gumb || 'Odpri')}</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </span>
+                </a>`;
         }
 
         function kartica(o) {
@@ -860,8 +883,43 @@
             }
         }
 
-        function ponastaviOrodja() {
-            alert('Ponastavitev na privzeta orodja izvedi prek "Uvozi JSON" z osnovnim seznamom, ali me prosi, da ti pripravim ustrezen SQL ukaz.');
+        async function ponastaviOrodja() {
+            const prijavljen = await preveriPrijavoSveze();
+            if (!prijavljen) { prikaziStatus('Nisi (več) prijavljen. Prijavi se znova prek #nastavitve.', 'napaka'); zapriNastavitve(); odpriPrijavo(); return; }
+            if (!confirm('Bazo nastavim točno na privzeti seznam iz te datoteke (' + PRIVZETA_ORODJA.length + ' orodij). Vsa druga orodja in sklopi bodo izbrisani za VSE obiskovalce. Nadaljujem?')) return;
+
+            try {
+                // 1) najprej sklopi, nato orodja (da so reference veljavne)
+                let r = await sb.from('kategorije').upsert(KATEGORIJE_PRIVZETO);
+                if (r.error) throw r.error;
+                r = await sb.from('orodja').upsert(PRIVZETA_ORODJA);
+                if (r.error) throw r.error;
+
+                // 2) izbriši vsa orodja, ki niso na privzetem seznamu
+                const privzetaOrodjaId = PRIVZETA_ORODJA.map(o => o.id);
+                const { data: vsaOrodja, error: e1 } = await sb.from('orodja').select('id');
+                if (e1) throw e1;
+                for (const o of vsaOrodja.filter(o => !privzetaOrodjaId.includes(o.id))) {
+                    const d = await sb.from('orodja').delete().eq('id', o.id);
+                    if (d.error) throw d.error;
+                }
+
+                // 3) izbriši sklope, ki niso na privzetem seznamu
+                const privzetiKatId = KATEGORIJE_PRIVZETO.map(k => k.id);
+                const { data: vseKat, error: e2 } = await sb.from('kategorije').select('id');
+                if (e2) throw e2;
+                for (const k of vseKat.filter(k => !privzetiKatId.includes(k.id))) {
+                    const d = await sb.from('kategorije').delete().eq('id', k.id);
+                    if (d.error) throw d.error;
+                }
+
+                prikaziStatus('Baza je ponastavljena na privzeti seznam.', 'uspeh');
+                await naloziKategorije();
+                await naloziOrodja();
+            } catch (e) {
+                console.error('Napaka pri ponastavitvi:', e);
+                prikaziStatus('Ponastavitev ni uspela: ' + e.message, 'napaka');
+            }
         }
 
         // ------- Prijava / odjava / skrit dostop do nastavitev -------
