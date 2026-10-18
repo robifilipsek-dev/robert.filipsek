@@ -403,6 +403,25 @@ html[data-theme=light] [class*="bg-"][class*="-600"],html[data-theme=light] .btn
 html[data-theme=light] #mnav a,html[data-theme=light] #mnav .mn{color:#000!important}
 html[data-theme=light] #mnav a:hover,html[data-theme=light] #mnav .mn:hover{color:#0891b2!important}
 </style>
+<style id="centered-layout">
+#top .max-w-3xl { margin-inline: auto; width: 100%; text-align: center; }
+#top [data-vsebina-kljuc="hero_poudarek"] { line-height: 1.4; padding: 0.08em 0.12em 0.22em; overflow: visible; }
+#top [data-vsebina-kljuc="hero_opis"] { margin-inline: auto; }
+#top .flex.flex-wrap { justify-content: center; }
+#orodja > div { max-width: 72rem; }
+#orodja .mb-16 { text-align: center; }
+#orodja [data-vsebina-kljuc="orodja_opis"] { margin-inline: auto; }
+#orodja-vsebina h3 { justify-content: center; text-align: center; }
+.tool-cards { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; }
+.tool-cards > a { flex: 0 1 100%; min-width: 0; }
+#o-meni > div { max-width: 68rem; }
+@media (min-width: 640px) { .tool-cards > a { flex-basis: calc((100% - 1rem) / 2); } }
+@media (min-width: 1024px) { .tool-cards > a { flex-basis: calc((100% - 3rem) / 4); } }
+@media (max-width: 767px) {
+  #o-meni .md\:col-span-7 { text-align: center; }
+  #o-meni .pt-4.flex { justify-content: center; }
+}
+</style>
 </head>
 <body class="font-sans antialiased text-slate-100 selection:bg-cyan-600 selection:text-white bg-page">
 
@@ -435,7 +454,7 @@ html[data-theme=light] #mnav a:hover,html[data-theme=light] #mnav .mn:hover{colo
                     </div>
                     <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
                         <span data-vsebina-kljuc="hero_naslov">Robert Filipšek</span> <br>
-                        <span class="grad-text font-extrabold" data-vsebina-kljuc="hero_poudarek">Inženiring & Razvoj</span>
+                        <span class="grad-text block mt-5 text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight" data-vsebina-kljuc="hero_poudarek">Načrtujem avtomatizacijo in razvijam uporabna spletna orodja.</span>
                     </h1>
                     <p class="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-xl" data-vsebina-kljuc="hero_opis">
                         Ukvarjam se z načrtovanjem industrijske avtomatizacije ter razvojem hitrih in uporabnih spletnih orodij ter aplikacij za vsakodnevno uporabo.
@@ -804,7 +823,7 @@ html[data-theme=light] #mnav a:hover,html[data-theme=light] #mnav .mn:hover{colo
         const VSEBINA_PRIVZETO = {
             hero_znacka: 'Inženir mehanskih konstrukcij & Razvijalec',
             hero_naslov: 'Robert Filipšek',
-            hero_poudarek: 'Inženiring & Razvoj',
+            hero_poudarek: 'Načrtujem avtomatizacijo in razvijam uporabna spletna orodja.',
             hero_opis: 'Ukvarjam se z načrtovanjem industrijske avtomatizacije ter razvojem hitrih in uporabnih spletnih orodij ter aplikacij za vsakodnevno uporabo.',
             ozadje_naslov: 'Kdo sem poleg inženirskega dela?',
             ozadje_besedilo: 'Že več kot 10 let delam na področju avtomatizacije industrijskih procesov, avtomatizacije proizvodnje in robotizacije. Poleg dela svoj čas rad posvečam osebnemu napredku, novim tehnološkim projektom in aktivnostim, ki me napolnijo z energijo. Živim in ustvarjam skupaj s partnerko Vaneso.\n\nProsti čas preživljam zelo aktivno in dinamiko rad prenašam tudi v šport. Najraje sem v gibanju – pa naj bo to na teniškem ali odbojkarskem igrišču, na kolesu ali na pohodih v hribih.\n\nIzjemen interes posvečam sodobnim tehnologijam in umetni inteligenci, ki jo z veseljem raziskujem ter uporabljam pri razvoju svojih projektov. Poleg tega spremljam finančne trge ter investiram na borzi (delnice in ETF-ji) in v Bitcoin.',
@@ -840,7 +859,11 @@ html[data-theme=light] #mnav a:hover,html[data-theme=light] #mnav .mn:hover{colo
         function izrisiVsebino() {
             document.querySelectorAll('[data-vsebina-kljuc]').forEach(el => {
                 const kljuc = el.getAttribute('data-vsebina-kljuc');
-                if (vsebinaPomnilnik[kljuc] !== undefined) el.textContent = vsebinaPomnilnik[kljuc];
+                if (vsebinaPomnilnik[kljuc] !== undefined) {
+                    const vrednost = vsebinaPomnilnik[kljuc];
+                    el.textContent = kljuc === 'hero_poudarek' && vrednost === 'Inženiring & Razvoj'
+                        ? VSEBINA_PRIVZETO.hero_poudarek : vrednost;
+                }
             });
             const ozadje = document.getElementById('ozadje-vsebina');
             if (ozadje && vsebinaPomnilnik.ozadje_besedilo) {
@@ -924,7 +947,7 @@ html[data-theme=light] #mnav a:hover,html[data-theme=light] #mnav .mn:hover{colo
                         <i class="fa-solid ${meta.ikona} text-xs text-${meta.barva}-400"></i>
                         <span>${pobegniHTML(meta.naslov)}</span>
                     </h3>
-                    <div class="${meta.id === 'storitve' ? 'grid gap-4' : 'grid sm:grid-cols-2 lg:grid-cols-4 gap-4'}">
+                    <div class="${meta.id === 'storitve' ? 'grid gap-4' : 'tool-cards gap-4'}">
                         ${postavke.map(o => meta.id === 'storitve' ? karticaSirska(o) : kartica(o)).join('')}
                     </div>`;
                 vsebnik.appendChild(blok);
